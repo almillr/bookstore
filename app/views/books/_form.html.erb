@@ -1,0 +1,24 @@
+<%= form_for(@book) do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label :book %></td>
+      <td><%= f.text_field :title, autofocus: true %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :Author %></td>
+      <td><%= f.text_field :author %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :Pages %></td>
+      <td><%= f.text_field :pages %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :Price %></td>
+      <td><%= f.text_field :price %></td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Save" %>
+    <%= link_to "Cancel", books_path %>
+  </p>
+<% end %>
