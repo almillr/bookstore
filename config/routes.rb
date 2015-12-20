@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get '/bookstore/new' => 'books#new', as: 'new_book'
   get '/bookstore/:id' => 'books#show', as: 'book'
   post '/bookstore' => 'books#create'
-  patch '/bookstore/:id/edit' => 'books#update'
+  get '/bookstore/id/edit'
+  patch '/bookstore/:id' => 'books#update'
   delete '/bookstore/:id' => 'books#destroy'
 
   resources :books
