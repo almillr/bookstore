@@ -1,4 +1,5 @@
 <%= form_for(@book) do |f| %>
+  <%= render 'shared/validation_errors', object: @book %>
   <table>
     <tr>
       <td><%= f.label :book %></td>

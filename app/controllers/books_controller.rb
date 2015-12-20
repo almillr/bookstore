@@ -1,12 +1,10 @@
 class BooksController < ApplicationController
-  before_action :new_book,
-                only: [ :create ]
   before_action :set_book,
                 only: [ :show, :update, :edit, :destroy ]
 
   def index
     @available_at = Time.now
-    @books = Book.all
+    @books = Book.order(:title).page(params[:page])
   end
 
   def show; end
@@ -16,15 +14,20 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book.save
-    redirect_to @book
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to @book, notice: "#{@book.title} was created!"
+    else
+      render :new
+    end
   end
 
-  def edit; end
-
   def update
-    @book.update(book_params)
-    redirect_to @book
+    if @book.update(book_params)
+      redirect_to @book, notice: "#{@book.title} was updated!"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -40,10 +43,6 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
-  end
-
-  def new_book
-    @book = Book.new(book_params)
   end
 
 end
